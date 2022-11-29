@@ -1,9 +1,11 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 describe('Renderiza o componente Pokemon e testa...', () => {
+  const pokemonIdRoute = '/pokemon/25';
   it('É renderizado um card com as informações de determinado Pokémo', () => {
     renderWithRouter(<App />);
 
@@ -39,12 +41,12 @@ describe('Renderiza o componente Pokemon e testa...', () => {
     const { history } = renderWithRouter(<App />);
     const details = screen.getByRole('link', { name: /more details/i });
     userEvent.click(details);
-    expect(history.location.pathname).toBe('/pokemon/25');
+    expect(history.location.pathname).toBe(pokemonIdRoute);
   });
   it('Existe um ícone de estrela nos Pokémon favoritados', () => {
     const { history } = renderWithRouter(<App />);
     act(() => {
-      history.push('/pokemon/25');
+      history.push(pokemonIdRoute);
     });
     const checkFavorite = screen.getByRole('checkbox');
     userEvent.click(checkFavorite);
