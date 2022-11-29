@@ -1,9 +1,11 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 describe('Renderize o componente PokemonDetails e testa...', () => {
+  const pokemonIdRoute = '/pokemon/25';
   it('As informações detalhadas do Pokémon selecionado são mostradas na tela', () => {
     renderWithRouter(<App />);
 
